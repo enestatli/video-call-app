@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { AngularFireAuth } from "@angular/fire/Auth/auth";
+import { AngularFireAuth } from "@angular/fire/auth";
 import { NavController, Platform } from "@ionic/angular";
 import { allRoutes } from "src/app/models/common-models";
 

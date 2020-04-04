@@ -14,6 +14,8 @@ export const getOpenTokSession = functions.https.onRequest(
   (request, response) => {
     opentok.createSession({}, (err, session) => {
       if (err) {
+        response.statusCode = 500;
+        response.send(JSON.stringify(err));
       } else {
         if (session?.sessionId) {
           const token = opentok.generateToken(session.sessionId, {});
