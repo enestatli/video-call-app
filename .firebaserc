@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "video-call-app-5bb0c"
+  },
+  "targets": {
+    "video-call-app-5bb0c": {
+      "hosting": {
+        "app": [
+          "video-call-app-5bb0c"
+        ]
+      }
+    }
+  }
+}

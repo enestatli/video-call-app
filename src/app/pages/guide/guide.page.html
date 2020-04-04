@@ -1,0 +1,90 @@
+<ion-content fullscreen="true" class="ion-padding">
+  <ion-fab
+    vertical="bottom"
+    horizontal="end"
+    *ngIf="!slidesEnded"
+    activated="true"
+    slot="fixed"
+  >
+    <ion-fab-button (click)="next()">Button</ion-fab-button>
+  </ion-fab>
+  <ion-slides #slides>
+    <ion-slide>
+      <div class="slide">
+        <div class="image-wrapper">
+          <img
+            src="https://raw.githubusercontent.com/ionic-team/ionic-docs/master/src/demos/api/slides/slide-1.png"
+            alt="alt text"
+          />
+        </div>
+        <h2>Welcome</h2>
+        <p>
+          The <b>ionic conference app</b> is a practical preview of the ionic
+          framework in action, and a demonstration of proper code use.
+        </p>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="slide">
+        <div class="image-wrapper">
+          <img
+            src="https://raw.githubusercontent.com/ionic-team/ionic-docs/master/src/demos/api/slides/slide-1.png"
+            alt="alt text"
+          />
+        </div>
+        <h2>What is Ionic?</h2>
+        <p>
+          <b>Ionic Framework</b> is an open source SDK that enables developers
+          to build high quality mobile apps with web technologies like HTML,
+          CSS, and JavaScript.
+        </p>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="slide">
+        <div class="image-wrapper">
+          <img
+            src="https://raw.githubusercontent.com/ionic-team/ionic-docs/master/src/demos/api/slides/slide-1.png"
+            alt="alt text"
+          />
+        </div>
+        <h2>What is Ionic Appflow?</h2>
+        <p>
+          <b>Ionic Appflow</b> is a powerful set of services and features built
+          on top of Ionic Framework that brings a totally new level of app
+          development agility to mobile dev teams.
+        </p>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="slide">
+        <div class="image-wrapper">
+          <img
+            src="https://raw.githubusercontent.com/ionic-team/ionic-docs/master/src/demos/api/slides/slide-1.png"
+            alt="alt text"
+          />
+        </div>
+        <h2>Ready to Play?</h2>
+        <ion-button fill="clear" (click)="proceed()"
+          >Continue
+          <ion-icon
+            style="zoom:4.0;"
+            slot="end"
+            name="arrow-forward"
+          ></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" (click)="goSettings()"
+          >Continue
+          <ion-icon
+            style="zoom:4.0;"
+            slot="end"
+            name="arrow-forward"
+          ></ion-icon>
+        </ion-button>
+      </div>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
