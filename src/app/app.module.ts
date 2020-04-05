@@ -14,6 +14,7 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
 import { environment } from "src/environments/environment";
 
 import * as firebase from "firebase";
+import { HttpClientModule } from "@angular/common/http";
 firebase.initializeApp(environment.firebaseConfig);
 
 @NgModule({
@@ -21,6 +22,7 @@ firebase.initializeApp(environment.firebaseConfig);
   entryComponents: [],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,

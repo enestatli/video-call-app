@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 import * as firebase from "firebase";
 
 @Component({
@@ -8,11 +9,19 @@ import * as firebase from "firebase";
 })
 export class VideoCallPage implements OnInit {
   getOpenTokSession = firebase.functions().httpsCallable("getOpenTokSession");
-  constructor() {}
+  constructor(public httpClient: HttpClient) {}
   ngOnInit() {
-    this.getOpenTokSession().then(function (result) {
-      var sanitizedMessage = result.data.text;
-      console.log(sanitizedMessage);
-    });
+    this.getOpenTokSession().then(
+      (result: firebase.functions.HttpsCallableResult) => {
+        console.log(result.data);
+      }
+    );
+    // this.httpClient
+    //   .get(
+    //     "https://us-central1-video-call-app-5bb0c.cloudfunctions.net/helloWorld"
+    //   )
+    //   .subscribe((res) => {
+    //     console.log(res);
+    //   });
   }
 }
