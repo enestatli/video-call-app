@@ -12,6 +12,7 @@ export const helloWorld = functions.https.onRequest((request, response) => {
 
 export const getOpenTokSession = functions.https.onRequest(
   (request, response) => {
+    response.set("Access-Control-Allow-Origin", "*");
     opentok.createSession({}, (err, session) => {
       if (err) {
         response.statusCode = 500;
@@ -24,6 +25,7 @@ export const getOpenTokSession = functions.https.onRequest(
               sessionId: session.sessionId,
               token: token,
             });
+
             response.send(resData);
           }
         }

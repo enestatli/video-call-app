@@ -12,6 +12,10 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { environment } from "src/environments/environment";
+
+import * as firebase from "firebase";
+firebase.initializeApp(environment.firebaseConfig);
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
