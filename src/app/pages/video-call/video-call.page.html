@@ -1,9 +1,28 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>video-call</ion-title>
+    <ion-title>Video Chat</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <div>
+    <video id="device" controls autoplay #remote></video>
+    <video id="me" controls autoplay #me></video>
+  </div>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="showRemote()"
+    [disabled]="callActive"
+  >
+    Connect
+  </button>
+  <button
+    mat-raised-button
+    color="warn"
+    (click)="hangup()"
+    [disabled]="!callActive"
+  >
+    Disconnect
+  </button>
 </ion-content>
