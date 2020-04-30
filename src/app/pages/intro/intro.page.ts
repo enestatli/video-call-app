@@ -39,11 +39,7 @@ export class IntroPage implements OnInit {
       this.ngFireAuth.auth
         .signInWithEmailAndPassword(user.email, user.password)
         .then((userCredentials) => {
-          if (userCredentials) {
-            this.navCtrl.navigateRoot(allRoutes.videoCall);
-          } else {
-            alert("Lutfen tekrar deneyin.");
-          }
+          // TODO: realtimedb de online olarak isaretlenecek
         });
     }
   }

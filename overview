@@ -1,0 +1,13 @@
+basic senaryo
+
+2 rol doktor ve kullanici, firebase user lar
+kullanici girisi yaptiktan sonra
+kullanici uygun olan doktor u listede gorur
+doctor un profine gider
+doctorun uygun olgudu isaretini gorur
+kullanici gorusme button una basar 
+video gorusma odasina girer sayfasina, otomatik goruntu baslar
+doctor a bir uyari gider, aktif gorusme istegi vardiye
+doktor kendi giris sayfasinda gorur ve cevap lar 
+doctor gorusme sayfasina odasina yonlendirilir ve otomatik gorusmeye katilir
+

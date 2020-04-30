@@ -1,15 +1,21 @@
-import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  NgZone,
+} from "@angular/core";
 import * as firebase from "firebase/app";
-import { Observable } from 'rxjs';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { Observable } from "rxjs";
+import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
 declare let RTCPeerConnection: any;
 
 @Component({
-  selector: 'app-meeting',
-  templateUrl: './video-call.page.html',
-  styleUrls: ['./video-call.page.scss']
+  selector: "app-meeting",
+  templateUrl: "./chat.page.html",
+  styleUrls: ["./chat.page.scss"],
 })
-export class VideoCallPage implements OnInit {
+export class ChatPage implements OnInit {
   callActive: boolean = false;
   pc: any;
   localStream: any;
@@ -20,9 +26,7 @@ export class VideoCallPage implements OnInit {
   @ViewChild("me", { static: true }) me: any;
   @ViewChild("remote", { static: true }) remote: any;
 
-  constructor(
-    private afDb: AngularFireDatabase,
-  ) { }
+  constructor(private afDb: AngularFireDatabase) {}
 
   ngOnInit() {
     this.setupWebRtc();
@@ -45,32 +49,42 @@ export class VideoCallPage implements OnInit {
     this.database.on("child_added", this.readMessage.bind(this));
 
     try {
-      this.pc = new RTCPeerConnection({
-        iceServers: [
-          { urls: "stun:stun.services.mozilla.com" },
-          { urls: "stun:stun.l.google.com:19302" }
-        ]
-      }, { optional: [] });
+      this.pc = new RTCPeerConnection(
+        {
+          iceServers: [
+            { urls: "stun:stun.services.mozilla.com" },
+            { urls: "stun:stun.l.google.com:19302" },
+          ],
+        },
+        { optional: [] }
+      );
     } catch (error) {
       console.log(error);
-      this.pc = new RTCPeerConnection({
-        iceServers: [
-          { urls: "stun:stun.services.mozilla.com" },
-          { urls: "stun:stun.l.google.com:19302" }
-        ]
-      }, { optional: [] });
+      this.pc = new RTCPeerConnection(
+        {
+          iceServers: [
+            { urls: "stun:stun.services.mozilla.com" },
+            { urls: "stun:stun.l.google.com:19302" },
+          ],
+        },
+        { optional: [] }
+      );
     }
 
+    this.pc.onicecandidate = (event) => {
+      event.candidate
+        ? this.sendMessage(
+            this.senderId,
+            JSON.stringify({ ice: event.candidate })
+          )
+        : console.log("Sent All Ice");
+    };
 
-    this.pc.onicecandidate = event => {
-      event.candidate ? this.sendMessage(this.senderId, JSON.stringify({ ice: event.candidate })) : console.log("Sent All Ice");
-    }
+    this.pc.onremovestream = (event) => {
+      console.log("Stream Ended");
+    };
 
-    this.pc.onremovestream = event => {
-      console.log('Stream Ended');
-    }
-
-    this.pc.ontrack = event =>
+    this.pc.ontrack = (event) =>
       (this.remote.nativeElement.srcObject = event.streams[0]); // use ontrack
     this.showMe();
   }
@@ -91,10 +105,16 @@ export class VideoCallPage implements OnInit {
           this.pc.addIceCandidate(new RTCIceCandidate(msg.ice));
         } else if (msg.sdp.type == "offer") {
           this.callActive = true;
-          this.pc.setRemoteDescription(new RTCSessionDescription(msg.sdp))
+          this.pc
+            .setRemoteDescription(new RTCSessionDescription(msg.sdp))
             .then(() => this.pc.createAnswer())
-            .then(answer => this.pc.setLocalDescription(answer))
-            .then(() => this.sendMessage(this.senderId, JSON.stringify({ sdp: this.pc.localDescription })));
+            .then((answer) => this.pc.setLocalDescription(answer))
+            .then(() =>
+              this.sendMessage(
+                this.senderId,
+                JSON.stringify({ sdp: this.pc.localDescription })
+              )
+            );
         } else if (msg.sdp.type == "answer") {
           this.callActive = true;
           this.pc.setRemoteDescription(new RTCSessionDescription(msg.sdp));
@@ -106,9 +126,10 @@ export class VideoCallPage implements OnInit {
   }
 
   showMe() {
-    navigator.mediaDevices.getUserMedia({ audio: true, video: true })
-      .then(stream => (this.me.nativeElement.srcObject = stream))
-      .then(stream => {
+    navigator.mediaDevices
+      .getUserMedia({ audio: true, video: true })
+      .then((stream) => (this.me.nativeElement.srcObject = stream))
+      .then((stream) => {
         this.pc.addStream(stream);
         this.localStream = stream;
       });
@@ -116,10 +137,14 @@ export class VideoCallPage implements OnInit {
 
   showRemote() {
     try {
-      this.pc.createOffer()
-        .then(offer => this.pc.setLocalDescription(offer))
+      this.pc
+        .createOffer()
+        .then((offer) => this.pc.setLocalDescription(offer))
         .then(() => {
-          this.sendMessage(this.senderId, JSON.stringify({ sdp: this.pc.localDescription }));
+          this.sendMessage(
+            this.senderId,
+            JSON.stringify({ sdp: this.pc.localDescription })
+          );
           this.callActive = true;
         });
     } catch (error) {
@@ -138,10 +163,24 @@ export class VideoCallPage implements OnInit {
   }
 
   guid() {
-    return (this.s4() + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4() + this.s4() + this.s4());
+    return (
+      this.s4() +
+      this.s4() +
+      "-" +
+      this.s4() +
+      "-" +
+      this.s4() +
+      "-" +
+      this.s4() +
+      "-" +
+      this.s4() +
+      this.s4() +
+      this.s4()
+    );
   }
   s4() {
-    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
   }
-
 }

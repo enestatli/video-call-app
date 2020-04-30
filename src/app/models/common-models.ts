@@ -5,7 +5,7 @@ export const allRoutes = {
   favorites: "favoriler",
   profile: "profil",
   settings: "ayarlar",
-  videoCall: "videoCall",
+  chat: "chat",
   tabs: "tabs",
   login: "login",
 };

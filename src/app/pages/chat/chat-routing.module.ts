@@ -1,12 +1,12 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
-import { IntroPage } from "./intro.page";
+import { ChatPage } from "./chat.page";
 
 const routes: Routes = [
   {
     path: "",
-    component: IntroPage,
+    component: ChatPage,
   },
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class IntroPageRoutingModule {}
+export class ChatPageRoutingModule {}

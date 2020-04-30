@@ -14,27 +14,32 @@ const routes: Routes = [
       import("./pages/intro/intro.module").then((m) => m.IntroPageModule),
   },
   {
-    path: allRoutes.videoCall,
+    path: allRoutes.chat,
     loadChildren: () =>
-      import("./pages/video-call/video-call.module").then(
-        (m) => m.VideoCallPageModule
+      import("./pages/chat/chat.module").then((m) => m.ChatPageModule),
+  },
+  {
+    path: allRoutes.profile,
+    loadChildren: () =>
+      import("./pages/profile/profile.module").then((m) => m.ProfilePageModule),
+  },
+  {
+    path: allRoutes.guide,
+    loadChildren: () =>
+      import("./pages/guide/guide.module").then((m) => m.GuidePageModule),
+  },
+  {
+    path: allRoutes.tabs,
+    loadChildren: () =>
+      import("./pages/tabs/tabs.module").then((m) => m.TabsPageModule),
+  },
+  {
+    path: allRoutes.settings,
+    loadChildren: () =>
+      import("./pages/settings/settings.module").then(
+        (m) => m.SettingsPageModule
       ),
   },
-  // {
-  //   path: allRoutes.guide,
-  //   loadChildren: () =>
-  //     import("./pages/guide/guide.module").then(m => m.GuidePageModule)
-  // },
-  // {
-  //   path: allRoutes.tabs,
-  //   loadChildren: () =>
-  //     import("./pages/tabs/tabs.module").then(m => m.TabsPageModule)
-  // },
-  // {
-  //   path: allRoutes.settings,
-  //   loadChildren: () =>
-  //     import("./pages/settings/settings.module").then(m => m.SettingsPageModule)
-  // }
 ];
 @NgModule({
   imports: [
