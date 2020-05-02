@@ -16,6 +16,8 @@ import { environment } from "src/environments/environment";
 import * as firebase from "firebase";
 import { HttpClientModule } from "@angular/common/http";
 import { ComponentsModule } from "./components/components.module";
+import { AuthGuardGuard } from "./services/auth-guard.guard";
+import { AuthService } from "./services/auth.service";
 
 firebase.initializeApp(environment.firebaseConfig);
 
@@ -36,6 +38,8 @@ firebase.initializeApp(environment.firebaseConfig);
     // StatusBar,
     // SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    AuthService,
+    AuthGuardGuard,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],

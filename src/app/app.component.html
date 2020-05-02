@@ -7,7 +7,7 @@
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item>
+        <ion-item *ngIf="authService.currentUser !== null">
           <ion-button (click)="logout()" expand="block" fill="clear" shape="round">
             Çıkış
           </ion-button>

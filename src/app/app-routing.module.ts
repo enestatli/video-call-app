@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 import { allRoutes } from "./models/common-models";
+import { AuthGuardGuard } from "./services/auth-guard.guard";
 
 const routes: Routes = [
   {
@@ -17,11 +18,13 @@ const routes: Routes = [
     path: allRoutes.intro,
     loadChildren: () =>
       import("./pages/intro/intro.module").then((m) => m.IntroPageModule),
+    canActivate: [AuthGuardGuard],
   },
   {
     path: allRoutes.chat,
     loadChildren: () =>
       import("./pages/chat/chat.module").then((m) => m.ChatPageModule),
+    canActivate: [AuthGuardGuard],
   },
   {
     path: allRoutes.profile,
