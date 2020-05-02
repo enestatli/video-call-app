@@ -5,8 +5,13 @@ import { allRoutes } from "./models/common-models";
 const routes: Routes = [
   {
     path: "",
-    redirectTo: allRoutes.intro,
+    redirectTo: allRoutes.login,
     pathMatch: "full",
+  },
+  {
+    path: allRoutes.login,
+    loadChildren: () =>
+      import("./pages/login/login.module").then((m) => m.LoginPageModule),
   },
   {
     path: allRoutes.intro,

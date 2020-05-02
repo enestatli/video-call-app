@@ -9,42 +9,28 @@ import { allRoutes } from "src/app/models/common-models";
   styleUrls: ["./login.page.scss"],
 })
 export class LoginPage implements OnInit {
-  users = [
-    {
-      username: "enes",
-      email: "enestatli@test.com",
-      password: "123456",
-    },
-    {
-      username: "boss",
-      email: "fatihboss@test.com",
-      password: "123456",
-    },
-  ];
+  user = {
+    email: "",
+    password: "",
+  };
+
   constructor(
     public ngFireAuth: AngularFireAuth,
     public navCtrl: NavController,
     public platform: Platform
   ) {}
 
-  ngOnInit() {
-    let user = null;
-    if (this.platform.is("ios")) {
-      user = this.users.find((u) => u.username == "boss");
-    } else {
-      user = this.users.find((u) => u.username == "enes");
-    }
+  ngOnInit() {}
 
-    if (user) {
-      this.ngFireAuth.auth
-        .signInWithEmailAndPassword(user.email, user.password)
-        .then((userCredentials) => {
-          if (userCredentials) {
-            this.navCtrl.navigateRoot(allRoutes.videoCall);
-          } else {
-            alert("Lutfen tekrar deneyin.");
-          }
-        });
-    }
+  login() {
+    this.ngFireAuth.auth
+      .signInWithEmailAndPassword(this.user.email, this.user.password)
+      .then((userCredentials) => {
+        if (userCredentials) {
+          this.navCtrl.navigateRoot(allRoutes.intro);
+        } else {
+          alert("Lutfen tekrar deneyin.");
+        }
+      });
   }
 }

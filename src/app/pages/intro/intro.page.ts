@@ -9,38 +9,11 @@ import { allRoutes } from "src/app/models/common-models";
   styleUrls: ["./intro.page.scss"],
 })
 export class IntroPage implements OnInit {
-  users = [
-    {
-      username: "enes",
-      email: "enestatli@test.com",
-      password: "123456",
-    },
-    {
-      username: "boss",
-      email: "fatihboss@test.com",
-      password: "123456",
-    },
-  ];
   constructor(
     public ngFireAuth: AngularFireAuth,
     public navCtrl: NavController,
     public platform: Platform
   ) {}
 
-  ngOnInit() {
-    let user = null;
-    if (this.platform.is("ios")) {
-      user = this.users.find((u) => u.username == "boss");
-    } else {
-      user = this.users.find((u) => u.username == "enes");
-    }
-
-    if (user) {
-      this.ngFireAuth.auth
-        .signInWithEmailAndPassword(user.email, user.password)
-        .then((userCredentials) => {
-          // TODO: realtimedb de online olarak isaretlenecek
-        });
-    }
-  }
+  ngOnInit() {}
 }
