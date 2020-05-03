@@ -9,8 +9,8 @@ import { AuthService } from "src/app/services/auth.service";
 })
 export class LoginPage implements OnInit {
   user = {
-    email: "",
-    password: "",
+    email: "enestatli@test.com",
+    password: "123456",
   };
 
   constructor(

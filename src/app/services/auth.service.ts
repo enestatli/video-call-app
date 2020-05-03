@@ -1,7 +1,9 @@
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { NavController } from "@ionic/angular";
-import { allRoutes } from "../models/common-models";
+import { allRoutes, storageKeys } from "../models/common-models";
+import { UserService } from "./user.service";
+import { MemberModel } from "../models/user-models";
 
 @Injectable({
   providedIn: "root",
@@ -10,7 +12,8 @@ export class AuthService {
   currentUser: any = null;
   constructor(
     public ngFireAuth: AngularFireAuth,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    public userService: UserService
   ) {
     // debugger;
     this.currentUser = this.ngFireAuth.auth.currentUser;
@@ -34,7 +37,12 @@ export class AuthService {
             // debugger;
             this.currentUser = this.ngFireAuth.auth.currentUser;
             setTimeout(() => {
-              this.navCtrl.navigateRoot(allRoutes.intro);
+              this.getCurrentUserinfo((member) => {
+                if (member) {
+                  this.setCurrentUserInfo(member);
+                  this.navCtrl.navigateRoot(allRoutes.intro);
+                }
+              });
             }, 100);
           } else {
             alert("Lutfen tekrar deneyin.");
@@ -44,5 +52,27 @@ export class AuthService {
           alert("Lutfen tekrar deneyin.");
         }
       );
+  }
+
+  getCurrentUserinfo(callback: (member: MemberModel) => any) {
+    this.userService.getUserById(this.currentUser.uid).subscribe((members) => {
+      if (Array.isArray(members) && members.length > 0) {
+        const member = members[0];
+        callback(member);
+      }
+    });
+  }
+
+  setCurrentUserInfo(member: MemberModel) {
+    localStorage.setItem(storageKeys.currentUserInfo, JSON.stringify(member));
+  }
+
+  getCurrentUserInfoFromStorage(): MemberModel {
+    const jsonStr = localStorage.getItem(storageKeys.currentUserInfo);
+    if (jsonStr) {
+      return JSON.parse(jsonStr) as MemberModel;
+    } else {
+      return null;
+    }
   }
 }

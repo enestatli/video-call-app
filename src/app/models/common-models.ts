@@ -9,3 +9,13 @@ export const allRoutes = {
   tabs: "tabs",
   login: "login",
 };
+
+export const storageKeys = {
+  currentUserInfo: "CURRENT_USER_INFO",
+};
+
+export const roles = {
+  admin: "admin",
+  member: "member",
+  doctor: "doctor",
+};
