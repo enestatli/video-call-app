@@ -1,21 +1,22 @@
 <ion-app>
   <ion-menu side="start" type="push" contentId="main">
     <ion-header>
-      <ion-toolbar color="danger">
+      <ion-toolbar color="warning">
         <ion-title>End Menu</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content>
+    <ion-content class="ion-padding">
       <ion-list>
         <ion-item *ngIf="authService.currentUser !== null">
-          <ion-button (click)="logout()" expand="block" fill="clear" shape="round">
+          <ion-button
+            (click)="logout()"
+            expand="block"
+            fill="clear"
+            shape="round"
+          >
             Çıkış
           </ion-button>
         </ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
       </ion-list>
     </ion-content>
   </ion-menu>

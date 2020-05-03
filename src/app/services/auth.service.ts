@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { NavController } from "@ionic/angular";
 import { allRoutes, storageKeys } from "../models/common-models";
-import { UserService } from "./user.service";
+import { MemberService } from "./member.service";
 import { MemberModel } from "../models/user-models";
 
 @Injectable({
@@ -13,7 +13,7 @@ export class AuthService {
   constructor(
     public ngFireAuth: AngularFireAuth,
     public navCtrl: NavController,
-    public userService: UserService
+    public memberService: MemberService
   ) {
     // debugger;
     this.currentUser = this.ngFireAuth.auth.currentUser;
@@ -55,7 +55,7 @@ export class AuthService {
   }
 
   getCurrentUserinfo(callback: (member: MemberModel) => any) {
-    this.userService.getUserById(this.currentUser.uid).subscribe((members) => {
+    this.memberService.getMemberById(this.currentUser.uid).subscribe((members) => {
       if (Array.isArray(members) && members.length > 0) {
         const member = members[0];
         callback(member);
@@ -64,11 +64,11 @@ export class AuthService {
   }
 
   setCurrentUserInfo(member: MemberModel) {
-    localStorage.setItem(storageKeys.currentUserInfo, JSON.stringify(member));
+    localStorage.setItem(storageKeys.currentMemberInfo, JSON.stringify(member));
   }
 
   getCurrentUserInfoFromStorage(): MemberModel {
-    const jsonStr = localStorage.getItem(storageKeys.currentUserInfo);
+    const jsonStr = localStorage.getItem(storageKeys.currentMemberInfo);
     if (jsonStr) {
       return JSON.parse(jsonStr) as MemberModel;
     } else {

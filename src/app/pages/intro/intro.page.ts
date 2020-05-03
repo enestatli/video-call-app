@@ -3,7 +3,7 @@ import { NavController, Platform } from "@ionic/angular";
 import { roles } from "src/app/models/common-models";
 import { MemberModel } from "src/app/models/user-models";
 import { AuthService } from "src/app/services/auth.service";
-import { UserService } from "src/app/services/user.service";
+import { MemberService } from "src/app/services/member.service";
 import { BehaviorSubject } from "rxjs";
 
 @Component({
@@ -14,22 +14,22 @@ import { BehaviorSubject } from "rxjs";
 export class IntroPage implements OnInit {
   userInfo: MemberModel = null;
   role: BehaviorSubject<string> = new BehaviorSubject("");
-  userList: BehaviorSubject<Array<MemberModel>> = new BehaviorSubject([]);
+  members: BehaviorSubject<Array<MemberModel>> = new BehaviorSubject([]);
   constructor(
     public authService: AuthService,
-    public userService: UserService,
+    public memberService: MemberService,
     public navCtrl: NavController,
     public platform: Platform
   ) {
     this.role.subscribe((r) => {
       if (r) {
         if (r == roles.doctor) {
-          this.userService.getUserByRole(roles.member).subscribe((members) => {
-            this.userList.next(members);
+          this.memberService.getMembersByRole(roles.client).subscribe((members) => {
+            this.members.next(members);
           });
-        } else if (r == roles.member) {
-          this.userService.getUserByRole(roles.doctor).subscribe((members) => {
-            this.userList.next(members);
+        } else if (r == roles.client) {
+          this.memberService.getMembersByRole(roles.doctor).subscribe((members) => {
+            this.members.next(members);
           });
         }
       }
@@ -39,8 +39,8 @@ export class IntroPage implements OnInit {
   ngOnInit() {
     this.userInfo = this.authService.getCurrentUserInfoFromStorage();
     if (this.userInfo) {
-      if (this.userInfo.roles.includes(roles.member)) {
-        this.role.next(roles.member);
+      if (this.userInfo.roles.includes(roles.client)) {
+        this.role.next(roles.client);
       } else if (this.userInfo.roles.includes(roles.doctor)) {
         this.role.next(roles.doctor);
       }

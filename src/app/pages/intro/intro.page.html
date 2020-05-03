@@ -3,8 +3,8 @@
   <!-- kullanici online doctorlari listesini gorecek-->
   <!-- doctor online hasta listesi gorebilir-->
   <ion-list>
-    <ion-item *ngFor="let user of userList | async">
-      <p>{{user.firstName}}</p>
+    <ion-item *ngFor="let m of members | async">
+      <p>{{m.firstName}}</p>
     </ion-item>
   </ion-list>
 </ion-content>

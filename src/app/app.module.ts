@@ -18,7 +18,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { ComponentsModule } from "./components/components.module";
 import { AuthGuardGuard } from "./services/auth-guard.guard";
 import { AuthService } from "./services/auth.service";
-import { UserService } from "./services/user.service";
+import { MemberService } from "./services/member.service";
 import { AngularFirestore } from "@angular/fire/firestore";
 
 firebase.initializeApp(environment.firebaseConfig);
@@ -42,10 +42,10 @@ firebase.initializeApp(environment.firebaseConfig);
     // SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthService,
-    UserService,
+    MemberService,
     AuthGuardGuard,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

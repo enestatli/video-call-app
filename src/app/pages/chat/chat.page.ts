@@ -26,7 +26,7 @@ export class ChatPage implements OnInit {
   @ViewChild("me", { static: true }) me: any;
   @ViewChild("remote", { static: true }) remote: any;
 
-  constructor(private afDb: AngularFireDatabase) {}
+  constructor(private afDb: AngularFireDatabase) { }
 
   ngOnInit() {
     this.setupWebRtc();
@@ -74,9 +74,9 @@ export class ChatPage implements OnInit {
     this.pc.onicecandidate = (event) => {
       event.candidate
         ? this.sendMessage(
-            this.senderId,
-            JSON.stringify({ ice: event.candidate })
-          )
+          this.senderId,
+          JSON.stringify({ ice: event.candidate })
+        )
         : console.log("Sent All Ice");
     };
 

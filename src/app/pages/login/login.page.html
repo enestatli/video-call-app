@@ -1,25 +1,50 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col
+        style="
+          height: 200;
+          text-align: center;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        <ion-icon name="person-outline" style="font-size: 100px;"></ion-icon>
+        <h1>DentFX</h1>
+      </ion-col>
+    </ion-row>
 
-<ion-content>
-  <ion-list>
-    <ion-item>
-      <ion-label>E-Posta</ion-label>
-      <ion-input type="text" [(ngModel)]="user.email" placeholder=""></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Sifre</ion-label>
-      <ion-input type="password" [(ngModel)]="user.password" placeholder=""></ion-input>
-    </ion-item>
-    <ion-item>
-
-      <ion-button (click)="login()" expand="block" fill="clear" shape="round">
-        Giris Yap
-      </ion-button>
-    </ion-item>
-  </ion-list>
-
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-label>E-Posta</ion-label>
+            <ion-input
+              type="text"
+              [(ngModel)]="user.email"
+              placeholder=""
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Sifre</ion-label>
+            <ion-input
+              type="password"
+              [(ngModel)]="user.password"
+              placeholder=""
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-button
+              (click)="login()"
+              expand="block"
+              fill="clear"
+              shape="round"
+            >
+              Giris Yap
+            </ion-button>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -10,12 +10,17 @@ export const allRoutes = {
   login: "login",
 };
 
+export const collections = {
+  members: 'members',
+  activities: 'activities'
+};
+
 export const storageKeys = {
-  currentUserInfo: "CURRENT_USER_INFO",
+  currentMemberInfo: "CURRENT_MEMBER_INFO",
 };
 
 export const roles = {
   admin: "admin",
-  member: "member",
   doctor: "doctor",
+  client: "client",
 };

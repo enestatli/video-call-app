@@ -1,13 +1,29 @@
 basic senaryo
 
-2 rol doktor ve kullanici, firebase user lar
-kullanici girisi yaptiktan sonra
-kullanici uygun olan doktor u listede gorur
-doctor un profine gider
-doctorun uygun olgudu isaretini gorur
-kullanici gorusme button una basar 
-video gorusma odasina girer sayfasina, otomatik goruntu baslar
-doctor a bir uyari gider, aktif gorusme istegi vardiye
-doktor kendi giris sayfasinda gorur ve cevap lar 
-doctor gorusme sayfasina odasina yonlendirilir ve otomatik gorusmeye katilir
+admin, doctor ve client olarak 3 rolumuz var
+kullanici giris yapinca, kullanici bilgisi alinir ve set edilir
+burada rol e gore
+
+client
+  intro sayfasina yonlendirilir
+  burada doctor listesini gorur
+  herhangi bir doctor onun profiline yonlendirilir
+  bu sayfada doctor dan randevu talep eder 
+  (burada sira bekleyen randevu mu yoksa armut taki gibi, doctorlarin acik olan talepleri cevaplayacagi gibi bir sanaryo dusumek gerekir ?)
+  yaptigi randevulari randevularim sayfasinda gorur 
+
+doctor
+  intro sayfasina yonlendirilir
+  kendisine gelen randevu taleplerini listesini gorur
+  buradan bir randevu talebine ayrintisina gider ve onaylar veya reddeder
+
+Fatih
+Atmaca
+lwMboD4CHZPIqjiPWWT76eA7NCo1
+admin, doctor
+
+Enes 
+Tatli
+EEpxIjA703NkNURCNCmGqfsUHLP2
+client
 
